@@ -1,3 +1,4 @@
+# Fixup names like "folder/bin" to "folder_bin"
 macro(fixup_target_name NAME_RAW)
     string(REPLACE "\\" "_" NAME_BIN "${NAME_RAW}")
     string(REPLACE "/"  "_" NAME_BIN "${NAME_BIN}")
@@ -5,6 +6,7 @@ macro(fixup_target_name NAME_RAW)
     set(NAME_PATH "${CMAKE_CURRENT_SOURCE_DIR}/src/${NAME_RAW}")
 endmacro()
 
+# Add a new binary and/or library
 function(add_class_exercise NAME_RAW)
     # Get optional dependencies
     cmake_parse_arguments(PARSE_ARGV 1 OPTIONS "" "" "DEPS;SOURCES;SOURCES_LIB")
@@ -55,3 +57,8 @@ endfunction()
 
 # Common utils library - must be ran before any other calls to this function!
 add_class_exercise(common)
+
+# Add a new binary and/or library in the homework folder
+macro(add_homework_exercise NAME_RAW)
+    add_class_exercise("homework/${NAME_RAW}")
+endmacro()
