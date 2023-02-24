@@ -8,6 +8,8 @@ function(add_class_exercise name)
         list(APPEND SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/${name}/${file}")
     endforeach()
     add_executable(${name} ${SOURCES})
+    target_include_directories(${name} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/_common/")
 endfunction()
 
 add_class_exercise(hello_world)
+add_class_exercise(fork)
