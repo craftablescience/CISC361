@@ -1,3 +1,14 @@
+# IDEs
+/.idea
+/.vs
+/.vscode
+
+# Output
+/build
+/cmake-build-*
+/dist
+/out
+
 # Prerequisites
 *.d
 
