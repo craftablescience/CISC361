@@ -2,8 +2,6 @@ name: Build
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 defaults:
   run:
@@ -44,7 +42,7 @@ jobs:
         working-directory: ${{env.BUILD_DIR}}
         run: ./generate_output.sh
 
-      - name: Commit Output
+      - name: Commit & Push Output
         if: ${{matrix.build_type == 'Debug'}}
         run: |
           git status
