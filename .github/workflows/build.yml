@@ -52,4 +52,4 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add .
           git commit -m "actions: push latest program output"
-          git push "https://${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}" "${{github.head_ref}}"
+          git push
