@@ -8,7 +8,7 @@
 
 int main() {
     for (int t = 0; t < NUM_TRIALS; t++) {
-        printf("Trial %d\n", t + 1);
+        printf("Trial %d/%d\n", t + 1, NUM_TRIALS);
 
         printf("- Running %d singlethreaded additions... ", NUM_ITERATIONS);
         double time = 0.0;
