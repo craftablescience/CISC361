@@ -2,7 +2,7 @@ macro(fixup_target_name NAME_RAW)
     string(REPLACE "\\" "_" NAME_BIN "${NAME_RAW}")
     string(REPLACE "/"  "_" NAME_BIN "${NAME_BIN}")
     set(NAME_LIB "${NAME_BIN}_lib")
-    set(NAME_PATH "${CMAKE_CURRENT_SOURCE_DIR}/${NAME_RAW}")
+    set(NAME_PATH "${CMAKE_CURRENT_SOURCE_DIR}/src/${NAME_RAW}")
 endmacro()
 
 function(add_class_exercise NAME_RAW)
@@ -45,7 +45,7 @@ function(add_class_exercise NAME_RAW)
 
     # Set include dir and link to pthread
     foreach(TGT IN LISTS GENERATED_TARGETS)
-        target_include_directories(${TGT} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
+        target_include_directories(${TGT} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
         target_link_libraries(${TGT} PUBLIC pthread ${TGT_DEPENDENCIES})
         if(NOT ${NAME_RAW} MATCHES "common")
             target_link_libraries(${TGT} PUBLIC common_lib)
