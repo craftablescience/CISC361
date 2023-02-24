@@ -9,5 +9,5 @@
 #include <sys/wait.h>
 #include <time.h>
 
-// Shared project headers
-#include "bwait.h"
+// Library header
+#include "../common/lib.h"

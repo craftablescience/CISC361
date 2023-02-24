@@ -1,7 +1,4 @@
-#pragma once
-
-#include <unistd.h>
-#include <sys/wait.h>
+#include <common.h>
 
 void bwait() {
     pid_t wpid;

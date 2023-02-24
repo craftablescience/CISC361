@@ -1,12 +1,12 @@
 #include "lib.h"
 
-#include <prelude.h>
+#include <common.h>
 
 #define MAX_NO_OF_ELEMENTS 100000000
 #define MAX_NO_OF_THREADS 4
 
-long long int sum;
-int arr[MAX_NO_OF_ELEMENTS];
+long long int sum_m;
+int arr_m[MAX_NO_OF_ELEMENTS];
 
 typedef struct {
     pthread_t thread_id;
@@ -20,9 +20,9 @@ static void* worker_sum(void* arg) {
 
     long long int current_sum = 0;
     for (int i = current_thread_data->start; i < current_thread_data->end; i++) {
-        current_sum += arr[i];
+        current_sum += arr_m[i];
     }
-    sum += current_sum;
+    sum_m += current_sum;
 
     return NULL;
 }
@@ -31,7 +31,7 @@ double compute_time_multithreaded(int enablePrinting) {
     // Let the array consists of first MAX_NO_OF_ELEMENTS integers,
     // 1 to MAX_NO_OF_ELEMENTS
     for (int i = 0; i < MAX_NO_OF_ELEMENTS; i++) {
-        arr[i] = i + 1;
+        arr_m[i] = i + 1;
     }
 
     // Argument data to send in worker functions
@@ -67,7 +67,7 @@ double compute_time_multithreaded(int enablePrinting) {
     cpu_time_taken = (double)(end - start);
 
     if (enablePrinting) {
-        printf("Total sum: %lld\n", sum);
+        printf("Total sum: %lld\n", sum_m);
         printf("Time taken to sum all the numbers: %lf\n", cpu_time_taken / CLOCKS_PER_SEC);
     }
 
