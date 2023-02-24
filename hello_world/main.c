@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <prelude.h>
 
 int main() {
     printf("Hello, World!\n");
