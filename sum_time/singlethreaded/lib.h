@@ -1,6 +1,3 @@
-#ifndef CISC361_SUM_TIME_SINGLETHREADED_LIB_H
-#define CISC361_SUM_TIME_SINGLETHREADED_LIB_H
+#pragma once
 
 double compute_time_singlethreaded(int enablePrinting);
-
-#endif

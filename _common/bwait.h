@@ -1,5 +1,4 @@
-#ifndef CISC361_BWAIT_H
-#define CISC361_BWAIT_H
+#pragma once
 
 #include <unistd.h>
 #include <sys/wait.h>
@@ -9,5 +8,3 @@ void bwait() {
     int status = 0;
     while ((wpid = wait(&status)) > 0);
 }
-
-#endif

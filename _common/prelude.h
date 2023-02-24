@@ -1,5 +1,4 @@
-#ifndef CISC361_PRELUDE_H
-#define CISC361_PRELUDE_H
+#pragma once
 
 // System headers
 #include <pthread.h>
@@ -12,5 +11,3 @@
 
 // Shared project headers
 #include "bwait.h"
-
-#endif
