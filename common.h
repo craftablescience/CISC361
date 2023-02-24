@@ -10,4 +10,4 @@
 #include <time.h>
 
 // Library header
-#include "../common/lib.h"
+#include <common/lib.h>

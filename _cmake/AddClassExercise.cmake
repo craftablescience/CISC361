@@ -45,7 +45,7 @@ function(add_class_exercise NAME_RAW)
 
     # Set include dir and link to pthread
     foreach(TGT IN LISTS GENERATED_TARGETS)
-        target_include_directories(${TGT} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/_include/")
+        target_include_directories(${TGT} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
         target_link_libraries(${TGT} PUBLIC pthread ${TGT_DEPENDENCIES})
         if(NOT ${NAME_RAW} MATCHES "common")
             target_link_libraries(${TGT} PUBLIC common_lib)

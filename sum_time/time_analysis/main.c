@@ -1,7 +1,7 @@
 #include <common.h>
 
-#include "../singlethreaded/lib.h"
-#include "../multithreaded/lib.h"
+#include <sum_time/singlethreaded/lib.h>
+#include <sum_time/multithreaded/lib.h>
 
 #define SMALL_SIZE 10000
 #define LARGE_SIZE 100000000
