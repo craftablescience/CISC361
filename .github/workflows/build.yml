@@ -5,6 +5,10 @@ on:
   pull_request:
     branches: [main]
 
+defaults:
+  run:
+    shell: bash
+
 env:
   BUILD_DIR: ${{github.workspace}}/build
 
@@ -42,5 +46,16 @@ jobs:
         run: cmake -G "Ninja" -B ${{env.BUILD_DIR}} -DCMAKE_BUILD_TYPE=${{matrix.build_type}}
 
       - name: Build
+        run: cmake --build ${{env.BUILD_DIR}} --config ${{matrix.build_type}} -- -j$(nproc)
+
+      - name: Generate Output
         working-directory: ${{env.BUILD_DIR}}
-        run: cmake --build . --config ${{matrix.build_type}} -- -j$(nproc)
+        run: ./generate_output.sh
+
+      - name: Commit Output
+        run: |
+          git status
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -a -m "actions: push latest program output"
+          git push "https://${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}" "${{github.head_ref}}"

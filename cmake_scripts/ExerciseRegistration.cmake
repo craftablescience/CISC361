@@ -18,6 +18,10 @@ macro(fixup_target_name NAME_RAW)
     set(NAME_LIB ${NAME_BIN}_lib)
 endmacro()
 
+# Create the script file
+set(GEN_OUTPUT_SCRIPT "${CMAKE_BINARY_DIR}/generate_output.sh")
+file(WRITE ${GEN_OUTPUT_SCRIPT} "")
+
 # Add a new binary and/or library
 function(add_class_exercise NAME_RAW)
     # Get optional dependencies
@@ -35,22 +39,28 @@ function(add_class_exercise NAME_RAW)
     if(EXISTS "${NAME_PATH}/main.c")
         set(HAS_BIN ON)
         message("-- Adding '${NAME_BIN}' binary")
+
         set(SOURCES_BIN "${NAME_PATH}/main.c")
         foreach(FILE IN LISTS OPTIONS_SOURCES)
             list(APPEND SOURCES "${NAME_PATH}/${FILE}")
         endforeach()
         add_executable(${NAME_BIN} ${SOURCES_BIN})
+
         list(APPEND GENERATED_TARGETS "${NAME_BIN}")
+
+        file(APPEND ${GEN_OUTPUT_SCRIPT} "./${NAME_BIN} > ${NAME_PATH}/output.txt\n")
     endif()
 
     # Add library
     if(EXISTS "${NAME_PATH}/lib.c")
         message("-- Adding '${NAME_LIB}' library")
+
         list(APPEND SOURCES_LIB "${NAME_PATH}/lib.c" "${NAME_PATH}/lib.h")
         foreach(FILE IN LISTS OPTIONS_SOURCES_LIB)
             list(APPEND SOURCES_LIB "${NAME_PATH}/${FILE}")
         endforeach()
         add_library(${NAME_LIB} STATIC ${SOURCES_LIB})
+
         if(HAS_BIN)
             target_link_libraries(${NAME_BIN} PUBLIC ${NAME_LIB})
         endif()
