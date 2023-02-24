@@ -1,7 +1,8 @@
 #ifndef CISC361_BWAIT_H
 #define CISC361_BWAIT_H
 
-#include "prelude.h"
+#include <unistd.h>
+#include <sys/wait.h>
 
 void bwait() {
     pid_t wpid;
