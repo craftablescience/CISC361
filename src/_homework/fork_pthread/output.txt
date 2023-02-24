@@ -1,0 +1,2 @@
+CHILD: value = 5
+PARENT: value = 0
