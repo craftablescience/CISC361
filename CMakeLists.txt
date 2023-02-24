@@ -3,7 +3,7 @@ project(CISC361 C)
 set(CMAKE_C_STANDARD 11)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake_scripts")
-include(AddClassExercise)
+include(ExerciseRegistration)
 
 # Exercises
 add_class_exercise(fork)
