@@ -40,10 +40,12 @@ jobs:
         run: cmake --build ${{env.BUILD_DIR}} --config ${{matrix.build_type}} -- -j$(nproc)
 
       - name: Generate Output
+        if: ${{matrix.build_type == 'Debug'}}
         working-directory: ${{env.BUILD_DIR}}
         run: ./generate_output.sh
 
       - name: Commit Output
+        if: ${{matrix.build_type == 'Debug'}}
         run: |
           git status
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
