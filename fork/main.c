@@ -14,12 +14,12 @@ int main() {
             printf("I am the grandchild (%d)\n", getpid());
             exit(0);
         } else {
-            bwait();
+            wait(NULL);
             printf("I am the child (%d)\n", getpid());
             exit(0);
         }
     } else {
-        bwait();
+        wait(NULL);
         printf("I am the parent (%d)\n", getpid());
     }
 
