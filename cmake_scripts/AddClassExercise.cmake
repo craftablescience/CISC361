@@ -1,9 +1,21 @@
 # Fixup names like "folder/bin" to "folder_bin"
 macro(fixup_target_name NAME_RAW)
-    string(REPLACE "\\" "_" NAME_BIN "${NAME_RAW}")
-    string(REPLACE "/"  "_" NAME_BIN "${NAME_BIN}")
-    set(NAME_LIB "${NAME_BIN}_lib")
+    # Path to targets
     set(NAME_PATH "${CMAKE_CURRENT_SOURCE_DIR}/src/${NAME_RAW}")
+
+    # Replace slashes and spaces
+    string(REPLACE " " "_" NAME_BIN "${NAME_RAW}")
+    string(REPLACE "\\" "_" NAME_BIN ${NAME_BIN})
+    string(REPLACE "/"  "_" NAME_BIN ${NAME_BIN})
+
+    # Remove underscore prefix
+    string(FIND ${NAME_BIN} "_" NAME_FOUND_UNDERSCORE)
+    if(NAME_FOUND_UNDERSCORE EQUAL 0)
+        string(SUBSTRING ${NAME_BIN} 1 -1 NAME_BIN)
+    endif()
+
+    # Set library target name
+    set(NAME_LIB ${NAME_BIN}_lib)
 endmacro()
 
 # Add a new binary and/or library
@@ -56,9 +68,9 @@ function(add_class_exercise NAME_RAW)
 endfunction()
 
 # Common utils library - must be ran before any other calls to this function!
-add_class_exercise(common)
+add_class_exercise(_common)
 
 # Add a new binary and/or library in the homework folder
 macro(add_homework_exercise NAME_RAW)
-    add_class_exercise("homework/${NAME_RAW}")
+    add_class_exercise("_homework/${NAME_RAW}")
 endmacro()
