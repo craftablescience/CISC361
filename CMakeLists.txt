@@ -14,3 +14,4 @@ add_class_exercise(sum_time/time_analysis DEPS sum_time/singlethreaded sum_time/
 
 # Homework implementations
 add_homework_exercise(fork_global_copied)
+add_homework_exercise(fork_pthread)

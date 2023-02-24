@@ -22,7 +22,7 @@ static void* worker_sum(void* arg) {
     }
     *(current_thread_data->sum) += current_sum;
 
-    return NULL;
+    pthread_exit(NULL);
 }
 
 double compute_time_multithreaded(int* arr, long int arrLen, int threadCount, int enablePrinting) {
