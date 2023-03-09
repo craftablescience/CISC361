@@ -26,7 +26,7 @@ file(CHMOD ${GEN_OUTPUT_SCRIPT} PERMISSIONS OWNER_EXECUTE GROUP_EXECUTE WORLD_EX
 # Add a new binary and/or library
 function(add_class_exercise NAME_RAW)
     # Get optional dependencies
-    cmake_parse_arguments(PARSE_ARGV 1 OPTIONS "" "" "DEPS;SOURCES;SOURCES_LIB")
+    cmake_parse_arguments(PARSE_ARGV 1 OPTIONS "" "" "DEPS;INPUTS;SOURCES;SOURCES_LIB")
     foreach(DEPENDENCY IN LISTS OPTIONS_DEPS)
         fixup_target_name(${DEPENDENCY})
         list(APPEND TGT_DEPENDENCIES ${NAME_LIB})
@@ -49,7 +49,15 @@ function(add_class_exercise NAME_RAW)
 
         list(APPEND GENERATED_TARGETS "${NAME_BIN}")
 
-        file(APPEND ${GEN_OUTPUT_SCRIPT} "./${NAME_BIN} > ${NAME_PATH}/output.txt\n")
+        if(OPTIONS_INPUTS)
+            file(APPEND ${GEN_OUTPUT_SCRIPT} "echo \"\" > ./input.txt\n")
+            foreach(INPUT IN LISTS OPTIONS_INPUTS)
+                file(APPEND ${GEN_OUTPUT_SCRIPT} "echo \"${INPUT}\" >> ./input.txt\n")
+            endforeach()
+            file(APPEND ${GEN_OUTPUT_SCRIPT} "./${NAME_BIN} < ./input.txt > ${NAME_PATH}/output.txt\n")
+        else()
+            file(APPEND ${GEN_OUTPUT_SCRIPT} "./${NAME_BIN} > ${NAME_PATH}/output.txt\n")
+        endif()
     endif()
 
     # Add library
