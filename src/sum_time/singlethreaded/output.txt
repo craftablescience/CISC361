@@ -1,2 +1,2 @@
 Total sum: 5000000050000000
-Time taken to sum all the numbers is 0.324595 seconds
+Time taken to sum all the numbers is 0.357890 seconds

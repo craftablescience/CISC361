@@ -1,10 +1,19 @@
-Enter Total Number of Processes (1-10): Enter Details of Process #1...
-Arrival Time (>= 0): Burst Time (> 0): Enter Details of Process #2...
-Arrival Time (>= 0): Burst Time (> 0): Enter Details of Process #3...
-Arrival Time (>= 0): Burst Time (> 0): 
-Enter Time Quantum (>= 1): 
+Enter Total Number of Processes (1-10): 
+Enter Total Number of Processes (1-10): 3
+Enter Details of Process #1...
+Arrival Time (>= 0): 0
+Burst Time (> 0): 10
+Enter Details of Process #2...
+Arrival Time (>= 0): 2
+Burst Time (> 0): 20
+Enter Details of Process #3...
+Arrival Time (>= 0): 3
+Burst Time (> 0): 5
+
+Enter Time Quantum (>= 1): 5
+
 Process ID	Arrival Time	Burst Time	Turnaround Time	Waiting Time
 
 
-Average Waiting Time: -54452180.000000
+Average Waiting Time: -108731992.000000
 Average Turnaround Time: 0.000000

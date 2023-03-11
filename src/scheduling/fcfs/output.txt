@@ -1,7 +1,15 @@
-Enter Total Number of Processes (1-16 inclusive): Enter Details of Process #1...
-Arrival Time (>= 0): Burst Time (> 0): Enter Details of Process #2...
-Arrival Time (>= 0): Burst Time (> 0): Enter Details of Process #3...
-Arrival Time (>= 0): Burst Time (> 0): 
+Enter Total Number of Processes (1-16 inclusive): 
+Enter Total Number of Processes (1-16 inclusive): 3
+Enter Details of Process #1...
+Arrival Time (>= 0): 0
+Burst Time (> 0): 10
+Enter Details of Process #2...
+Arrival Time (>= 0): 2
+Burst Time (> 0): 20
+Enter Details of Process #3...
+Arrival Time (>= 0): 3
+Burst Time (> 0): 5
+
 Process ID	Arrival Time	Burst Time	Turnaround Time	Waiting Time
 Process #1	0		10		10		0
 Process #2	2		20		28		8

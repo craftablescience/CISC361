@@ -1,5 +1,16 @@
-Enter Total Number of Processes (1-16 inclusive): Enter Details of Process #1...
-Arrival Time (>= 0): Burst Time (> 0): Priority (>= 0): Enter Details of Process #2...
-Arrival Time (>= 0): Burst Time (> 0): Priority (>= 0): Enter Details of Process #3...
-Arrival Time (>= 0): Burst Time (> 0): Priority (>= 0): 
-Enter Time Quantum (>= 1): 
+Enter Total Number of Processes (1-16 inclusive): 
+Enter Total Number of Processes (1-16 inclusive): 3
+Enter Details of Process #1...
+Arrival Time (>= 0): 0
+Burst Time (> 0): 10
+Priority (>= 0): 1
+Enter Details of Process #2...
+Arrival Time (>= 0): 2
+Burst Time (> 0): 20
+Priority (>= 0): 2
+Enter Details of Process #3...
+Arrival Time (>= 0): 3
+Burst Time (> 0): 5
+Priority (>= 0): 2
+
+Enter Time Quantum (>= 1): 5
