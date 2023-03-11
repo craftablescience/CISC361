@@ -23,3 +23,19 @@ float avgi(const int arr[], int n) {
     }
     return sum / (float) n;
 }
+
+#ifdef PRINT_INPUTS
+int scanf_printf(const char* fmt, ...) {
+    int ret;
+    char in[1024];
+    fgets(in, sizeof(in), stdin);
+
+    va_list args;
+    va_start(args, fmt);
+    ret = vsscanf(in, fmt, args);
+    vprintf(in, args);
+    va_end(args);
+
+    return ret;
+}
+#endif

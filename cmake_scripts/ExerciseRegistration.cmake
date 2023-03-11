@@ -1,3 +1,5 @@
+option(PRINT_INPUTS "Prints stdin input from custom scan function" OFF)
+
 # Fixup names like "folder/bin" to "folder_bin"
 macro(fixup_target_name NAME_RAW)
     # Path to targets
@@ -82,6 +84,9 @@ function(add_class_exercise NAME_RAW)
         target_link_libraries(${TGT} PUBLIC pthread ${TGT_DEPENDENCIES})
         if(NOT ${NAME_RAW} MATCHES "common")
             target_link_libraries(${TGT} PUBLIC common_lib)
+        endif()
+        if(PRINT_INPUTS)
+            target_compile_definitions(${TGT} PUBLIC -DPRINT_INPUTS=1)
         endif()
     endforeach()
 endfunction()
