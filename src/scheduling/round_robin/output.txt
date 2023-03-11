@@ -6,5 +6,5 @@ Enter Time Quantum (>= 1):
 Process ID	Arrival Time	Burst Time	Turnaround Time	Waiting Time
 
 
-Average Waiting Time: -624313792.000000
+Average Waiting Time: -54452180.000000
 Average Turnaround Time: 0.000000
