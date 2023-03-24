@@ -32,8 +32,8 @@ static void run_scheduler(bool use_round_robin, int num_processes, int arrival_t
         for (int i = 0; i < num_processes - 1; i++) {
             for (int j = 0; j < num_processes - i - 1; j++) {
                 if (arrival_time[j] > arrival_time[j + 1]) {
-                    swapi(&arrival_time[j], &arrival_time[j + 1]);
-                    swapi(&burst_time[j], &burst_time[j + 1]);
+                    swap(&arrival_time[j], &arrival_time[j + 1]);
+                    swap(&burst_time[j], &burst_time[j + 1]);
                 }
             }
         }
@@ -52,6 +52,6 @@ static void run_scheduler(bool use_round_robin, int num_processes, int arrival_t
     }
 
     // Print Average Wait and Turnaround Times
-    printf("\n\nAverage Waiting Time: %f", avgi(wait_times, num_processes));
-    printf("\nAverage Turnaround Time: %f\n", avgi(turnaround_times, num_processes));
+    printf("\n\nAverage Waiting Time: %f", avg(wait_times, num_processes));
+    printf("\nAverage Turnaround Time: %f\n", avg(turnaround_times, num_processes));
 }

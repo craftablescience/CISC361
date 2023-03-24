@@ -92,7 +92,7 @@ function(add_class_exercise NAME_RAW)
 endfunction()
 
 # Common utils library - must be ran before any other calls to this function!
-add_class_exercise(_common)
+add_class_exercise(_common SOURCES_LIB queue.h queue.c)
 
 # Add a new binary and/or library in the homework folder
 macro(add_homework_exercise NAME_RAW)

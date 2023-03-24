@@ -1,10 +1,15 @@
 #pragma once
 
-void swapi(int* x, int* y);
+#include "queue.h"
 
-void sorti(int arr[], int n);
+// I love Rust 🥰🥰🥰
+#define loop for(;;)
 
-float avgi(const int arr[], int n);
+void swap(int* x, int* y);
+
+void sort(int arr[], int n);
+
+float avg(const int arr[], int n);
 
 #ifdef PRINT_INPUTS
     #define scanf scanf_printf
