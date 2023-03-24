@@ -78,6 +78,19 @@ function(add_class_exercise NAME_RAW)
         list(APPEND GENERATED_TARGETS "${NAME_LIB}")
     endif()
 
+    # Add tests
+    if(EXISTS "${NAME_PATH}/test.c")
+        message("-- Adding '${NAME_LIB}' test")
+
+        list(APPEND SOURCES_LIB_TEST "${NAME_PATH}/test.c")
+        add_executable(${NAME_LIB}_test ${SOURCES_LIB_TEST})
+        target_link_libraries(${NAME_LIB}_test PRIVATE ${NAME_LIB})
+
+        list(APPEND GENERATED_TARGETS ${NAME_LIB}_test)
+
+        file(APPEND ${GEN_OUTPUT_SCRIPT} "./${NAME_LIB}_test > ${NAME_PATH}/test_output.txt\n")
+    endif()
+
     # Set include dir and link to pthread
     foreach(TGT IN LISTS GENERATED_TARGETS)
         target_include_directories(${TGT} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
