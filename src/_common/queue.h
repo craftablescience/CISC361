@@ -2,14 +2,13 @@
 
 #include <stdbool.h>
 
-/*
- * A simple interface over a circular buffer -- or it would be if I actually understood math
- */
-
+/// A simple interface over a circular buffer
 typedef struct {
     int* data;
     int size;
     int capacity;
+    int head;
+    int tail;
 } queue_t;
 
 queue_t* queue_alloc(int capacity);
@@ -19,6 +18,8 @@ queue_t* queue_copy(queue_t* queue);
 void queue_free(queue_t** queue);
 
 bool queue_empty(queue_t* queue);
+
+bool queue_full(queue_t* queue);
 
 int queue_size(queue_t* queue);
 
@@ -32,33 +33,8 @@ int queue_pop_front(queue_t* queue);
 
 int queue_pop_back(queue_t* queue);
 
-/*
-TODO:
+int queue_peek_front(queue_t* queue);
 
-resize
-    Change size (public member function)
+int queue_peek_back(queue_t* queue);
 
-empty
-    Test whether container is empty (public member function)
-
-shrink_to_fit
-    Shrink to fit (public member function)
-
-at
-    Access element (public member function)
-
-front
-    Access first element (public member function)
-
-back
-    Access last element (public member function)
-
-insert
-    Insert elements (public member function)
-
-erase
-    Erase elements (public member function)
-
-clear
-    Clear content (public member function)
-*/
+void queue_clear(queue_t* queue);

@@ -8,6 +8,8 @@ queue_t* queue_alloc(int capacity) {
     queue->data = malloc(capacity * sizeof(int));
     queue->size = 0;
     queue->capacity = capacity;
+    queue->head = 0;
+    queue->tail = -1;
     return queue;
 }
 
@@ -15,6 +17,8 @@ queue_t* queue_copy(queue_t* queue) {
     queue_t* new_queue = queue_alloc(queue->capacity);
     memcpy(new_queue->data, queue->data, queue->capacity * sizeof(int));
     new_queue->size = queue->size;
+    new_queue->head = queue->head;
+    new_queue->tail = queue->tail;
     return new_queue;
 }
 
@@ -28,6 +32,10 @@ bool queue_empty(queue_t* queue) {
     return !queue->size;
 }
 
+bool queue_full(queue_t* queue) {
+    return queue->size == queue->capacity;
+}
+
 int queue_size(queue_t* queue) {
     return queue->size;
 }
@@ -37,47 +45,62 @@ int queue_max_size(queue_t* queue) {
 }
 
 bool queue_push_front(queue_t* queue, int value) {
-    if (queue->size == queue->capacity) {
+    if (queue_full(queue)) {
         return false;
     }
-    int* tmp = malloc(queue->size * sizeof(int));
-    memcpy(tmp, queue->data, queue->size * sizeof(int));
-    queue->data[0] = value;
-    memcpy(queue->data + 1, tmp, queue->size * sizeof(int));
-    free(tmp);
+    queue->head = (queue->head - 1 + queue->capacity) % queue->capacity;
+    queue->data[queue->head] = value;
     ++queue->size;
     return true;
 }
 
 bool queue_push_back(queue_t* queue, int value) {
-    if (queue->size == queue->capacity) {
+    if (queue_full(queue)) {
         return false;
     }
-    queue->data[queue->size] = value;
+    queue->tail = (queue->tail + 1) % queue->capacity;
+    queue->data[queue->tail] = value;
     ++queue->size;
     return true;
 }
 
 int queue_pop_front(queue_t* queue) {
-    if (!queue->size) {
+    if (queue_empty(queue)) {
         return 0;
     }
-    int* tmp = malloc(queue->size * sizeof(int));
-    memcpy(tmp, queue->data, queue->size * sizeof(int));
-    queue->data[queue->size] = 0;
-    memcpy(queue->data, tmp + 1, queue->size * sizeof(int) - sizeof(int));
-    int value = tmp[0];
-    free(tmp);
+    int value = queue->data[queue->head];
+    queue->head = (queue->head + 1) % queue->capacity;
     --queue->size;
     return value;
 }
 
 int queue_pop_back(queue_t* queue) {
-    if (!queue->size) {
+    if (queue_empty(queue)) {
         return 0;
     }
-    int value = queue->data[queue->size];
-    queue->data[queue->size] = 0;
+    int value = queue->data[queue->tail];
+    queue->tail = (queue->tail - 1 + queue->capacity) % queue->capacity;
     --queue->size;
     return value;
+}
+
+int queue_peek_front(queue_t* queue) {
+    if (queue_empty(queue)) {
+        return 0;
+    }
+    return queue->data[queue->head];
+}
+
+int queue_peek_back(queue_t* queue) {
+    if (queue_empty(queue)) {
+        return 0;
+    }
+    return queue->data[queue->tail];
+}
+
+void queue_clear(queue_t* queue) {
+    memset(queue->data, 0, queue->capacity * sizeof(int));
+    queue->size = 0;
+    queue->head = 0;
+    queue->tail = -1;
 }
