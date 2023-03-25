@@ -91,10 +91,10 @@ function(add_class_exercise NAME_RAW)
         file(APPEND ${GEN_OUTPUT_SCRIPT} "./${NAME_LIB}_test > ${NAME_PATH}/test_output.txt\n")
     endif()
 
-    # Set include dir and link to pthread
+    # Set include dir and link to pthread + rt
     foreach(TGT IN LISTS GENERATED_TARGETS)
         target_include_directories(${TGT} PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/src")
-        target_link_libraries(${TGT} PUBLIC pthread ${TGT_DEPENDENCIES})
+        target_link_libraries(${TGT} PUBLIC pthread rt ${TGT_DEPENDENCIES})
         if(NOT ${NAME_RAW} MATCHES "common")
             target_link_libraries(${TGT} PUBLIC common_lib)
         endif()

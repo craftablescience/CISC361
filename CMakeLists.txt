@@ -21,6 +21,10 @@ add_class_exercise(scheduling/fcfs_priority        DEPS scheduling INPUTS 3 0 10
 add_class_exercise(scheduling/round_robin_priority DEPS scheduling INPUTS 3 0 10 1 2 20 2 3 5 2 5)
 
 
+# Exercises from 3
+add_class_exercise(semaphore)
+
+
 # Homework implementations
 add_homework_exercise(fork_global_copied)
 add_homework_exercise(fork_pthread)
