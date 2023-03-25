@@ -9,7 +9,7 @@ queue_t* queue_alloc(int capacity) {
     queue->size = 0;
     queue->capacity = capacity;
     queue->head = 0;
-    queue->tail = -1;
+    queue->tail = 0;
     return queue;
 }
 
@@ -58,8 +58,8 @@ bool queue_push_back(queue_t* queue, int value) {
     if (queue_full(queue)) {
         return false;
     }
-    queue->tail = (queue->tail + 1) % queue->capacity;
     queue->data[queue->tail] = value;
+    queue->tail = (queue->tail + 1) % queue->capacity;
     ++queue->size;
     return true;
 }
@@ -78,8 +78,8 @@ int queue_pop_back(queue_t* queue) {
     if (queue_empty(queue)) {
         return 0;
     }
+    queue->tail = (queue->tail + queue->capacity - 1) % queue->capacity;
     int value = queue->data[queue->tail];
-    queue->tail = (queue->tail - 1 + queue->capacity) % queue->capacity;
     --queue->size;
     return value;
 }
@@ -95,12 +95,12 @@ int queue_peek_back(queue_t* queue) {
     if (queue_empty(queue)) {
         return 0;
     }
-    return queue->data[queue->tail];
+    return queue->data[(queue->tail + queue->capacity - 1) % queue->capacity];
 }
 
 void queue_clear(queue_t* queue) {
     memset(queue->data, 0, queue->capacity * sizeof(int));
     queue->size = 0;
     queue->head = 0;
-    queue->tail = -1;
+    queue->tail = 0;
 }
