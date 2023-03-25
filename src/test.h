@@ -1,34 +1,92 @@
 #pragma once
 
-#define test_begin()                       \
-    int main() {                           \
-        int zxcvb_helper_failed_tests = 0; \
-        int zxcvb_helper_total_tests = 0;
+#include <stdarg.h>
+#include <stdbool.h>
 
-#define test_end()                                                \
-        printf(                                                   \
-            "Passed %d / %d tests.",                              \
-            zxcvb_helper_total_tests - zxcvb_helper_failed_tests, \
-            zxcvb_helper_total_tests                              \
-        );                                                        \
+#define test(name) static bool name(bool zxcvb_helper_failed_expected)
+
+#define assert_true(expr)                                                               \
+    do {                                                                                \
+        if (!(expr)) {                                                                  \
+            printf("Line %d: asserted \"%s\" to be true, was false!", __LINE__, #expr); \
+            return false;                                                               \
+        }                                                                               \
+    } while (0)
+
+#define assert_false(expr)                                                              \
+    do {                                                                                \
+        if (expr) {                                                                     \
+            printf("Line %d: asserted \"%s\" to be false, was true!", __LINE__, #expr); \
+            return false;                                                               \
+        }                                                                               \
+    } while (0)
+
+#define assert_eq(lhs, rhs)                                                            \
+    do {                                                                               \
+        if ((lhs) != (rhs)) {                                                          \
+            printf("Line %d: asserted \"%s\" to equal \"%s\"!", __LINE__, #lhs, #rhs); \
+            return false;                                                              \
+        }                                                                              \
+    } while (0)
+
+#define assert_neq(lhs, rhs)                                                               \
+    do {                                                                                   \
+        if ((lhs) == (rhs)) {                                                              \
+            printf("Line %d: asserted \"%s\" to NOT equal \"%s\"!", __LINE__, #lhs, #rhs); \
+            return false;                                                                  \
+        }                                                                                  \
+    } while (0)
+
+#define expect_true(expr)                                                               \
+    do {                                                                                \
+        if (!(expr)) {                                                                  \
+            printf("Line %d: expected \"%s\" to be true, was false!", __LINE__, #expr); \
+            zxcvb_helper_failed_expected = false;                                       \
+        }                                                                               \
+    } while (0)
+
+#define expect_false(expr)                                                              \
+    do {                                                                                \
+        if (expr) {                                                                     \
+            printf("Line %d: expected \"%s\" to be false, was true!", __LINE__, #expr); \
+            zxcvb_helper_failed_expected = false;                                       \
+        }                                                                               \
+    } while (0)
+
+#define expect_eq(lhs, rhs)                                                            \
+    do {                                                                               \
+        if ((lhs) != (rhs)) {                                                          \
+            printf("Line %d: expected \"%s\" to equal \"%s\"!", __LINE__, #lhs, #rhs); \
+            zxcvb_helper_failed_expected = false;                                      \
+        }                                                                              \
+    } while (0)
+
+#define expect_neq(lhs, rhs)                                                               \
+    do {                                                                                   \
+        if ((lhs) == (rhs)) {                                                              \
+            printf("Line %d: expected \"%s\" to NOT equal \"%s\"!", __LINE__, #lhs, #rhs); \
+            zxcvb_helper_failed_expected = false;                                          \
+        }                                                                                  \
+    } while (0)
+
+#define test_end() return zxcvb_helper_failed_expected
+
+#define test_run(...)                                       \
+    static void test_run_internal(bool(*test)(bool), ...) { \
+        int total = 0;                                      \
+        int passed = 0;                                     \
+        va_list args;                                       \
+        va_start(args, test);                               \
+        while (test) {                                      \
+            ++total;                                        \
+            if ((*test)(true)) {                            \
+                ++passed;                                   \
+            }                                               \
+            test = va_arg(args, bool(*)(bool));             \
+        }                                                   \
+        va_end(args);                                       \
+        printf("Passed %d/%d tests!", passed, total);       \
+    }                                                       \
+    int main() {                                            \
+        test_run_internal(__VA_ARGS__, NULL);               \
     }
-
-#define test_group(name) // Empty, use this to group test blocks
-
-#define expect_true(expr)                                            \
-    do {                                                             \
-        ++zxcvb_helper_total_tests;                                  \
-        if (!(expr)) {                                               \
-            ++zxcvb_helper_failed_tests;                             \
-            printf("Expected \"%s\" to be true, was false!", #expr); \
-        }                                                            \
-    } while (0)
-
-#define expect_false(expr)                                           \
-    do {                                                             \
-        ++zxcvb_helper_total_tests;                                  \
-        if (expr) {                                                  \
-            ++zxcvb_helper_failed_tests;                             \
-            printf("Expected \"%s\" to be false, was true!", #expr); \
-        }                                                            \
-    } while (0)
