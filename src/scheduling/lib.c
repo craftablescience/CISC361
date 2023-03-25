@@ -2,25 +2,25 @@
 
 #include <common.h>
 
-static void run_scheduler(bool use_round_robin, int num_processes, int arrival_time[], int burst_time[], int quantum_time);
+static void run_scheduler(bool use_round_robin, bool use_priority, int num_processes, int arrival_time[], int burst_time[], int priority[], int quantum_time);
 
 void run_scheduler_fcfs(int num_processes, int arrival_time[], int burst_time[]) {
-    run_scheduler(false, num_processes, arrival_time, burst_time, 0);
+    run_scheduler(false, false, num_processes, arrival_time, burst_time, NULL, 0);
 }
 
 void run_scheduler_round_robin(int num_processes, int arrival_time[], int burst_time[], int quantum_time) {
-    run_scheduler(true, num_processes, arrival_time, burst_time, quantum_time);
+    run_scheduler(true, false, num_processes, arrival_time, burst_time, NULL, quantum_time);
 }
 
 void run_scheduler_fcfs_priority(int num_processes, int arrival_time[], int burst_time[], int priority[]) {
-    // todo: fcfs priority
+    run_scheduler(false, true, num_processes, arrival_time, burst_time, priority, 0);
 }
 
 void run_scheduler_round_robin_priority(int num_processes, int arrival_time[], int burst_time[], int priority[], int quantum_time) {
-    // todo: round robin priority
+    run_scheduler(true, true, num_processes, arrival_time, burst_time, priority, quantum_time);
 }
 
-static void run_scheduler(bool use_round_robin, int num_processes, int arrival_time[], int burst_time[], int quantum_time) {
+static void run_scheduler(bool use_round_robin, bool use_priority, int num_processes, int arrival_time[], int burst_time[], int priority[], int quantum_time) {
     int wait_times[MAX_PROCESSES];
     int turnaround_times[MAX_PROCESSES];
 
@@ -56,7 +56,7 @@ static void run_scheduler(bool use_round_robin, int num_processes, int arrival_t
         int i = 0; // The number of processed processes
         int process = -1; // The current process (<0 being invalid)
 
-        // I like Rust 🥰🥰🥰
+        // I love Rust 🥰🥰🥰
         loop {
             // If we have new arrivals, add them to the queue
             while (i < num_processes && arrival_time[i] <= wait_time && i != process) {
