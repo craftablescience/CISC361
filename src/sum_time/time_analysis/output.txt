@@ -1,8 +1,8 @@
-Size: 10000, Threads: 1... 0.000028
-Size: 10000, Threads: 2... 0.000148
-Size: 100000000, Threads: 1... 0.277313
-Size: 100000000, Threads: 2... 0.234651
-Size: 10000, Threads: 1... 0.000029
-Size: 10000, Threads: 8... 0.000666
-Size: 100000000, Threads: 1... 0.277242
-Size: 100000000, Threads: 8... 0.238749
+Size: 10000, Threads: 1... 0.000037
+Size: 10000, Threads: 2... 0.000143
+Size: 100000000, Threads: 1... 0.357655
+Size: 100000000, Threads: 2... 0.315198
+Size: 10000, Threads: 1... 0.000040
+Size: 10000, Threads: 8... 0.000569
+Size: 100000000, Threads: 1... 0.357598
+Size: 100000000, Threads: 8... 0.316028

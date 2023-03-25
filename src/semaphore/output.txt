@@ -1,0 +1,58 @@
+Creating 4 threads...
+
+Thread 1 entering critical section...
+
+Thread 1 Value: 1
+
+Thread 1 Value: 2
+
+Thread 1 Value: 3
+
+Thread 1 Value: 4
+
+Thread 1 Value: 5
+
+Thread 1 exiting critical section...
+
+Thread 2 entering critical section...
+
+Thread 2 Value: 6
+
+Thread 2 Value: 7
+
+Thread 2 Value: 8
+
+Thread 2 Value: 9
+
+Thread 2 Value: 10
+
+Thread 2 exiting critical section...
+
+Thread 4 entering critical section...
+
+Thread 4 Value: 11
+
+Thread 4 Value: 12
+
+Thread 4 Value: 13
+
+Thread 4 Value: 14
+
+Thread 4 Value: 15
+
+Thread 4 exiting critical section...
+
+Thread 3 entering critical section...
+
+Thread 3 Value: 16
+
+Thread 3 Value: 17
+
+Thread 3 Value: 18
+
+Thread 3 Value: 19
+
+Thread 3 Value: 20
+
+Thread 3 exiting critical section...
+Value Correct! count = 20

@@ -12,3 +12,12 @@ Enter Details of Process #3...
 Arrival Time (>= 0): 3
 Burst Time (> 0): 5
 Priority (>= 0): 2
+
+Process ID	Arrival Time	Burst Time	Turnaround Time	Waiting Time
+Process #1	0		10		10		0
+Process #2	2		20		28		8
+Process #3	3		5		32		27
+
+
+Average Waiting Time: 11.666667
+Average Turnaround Time: 23.333334
